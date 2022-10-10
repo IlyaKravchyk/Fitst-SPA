@@ -1,0 +1,133 @@
+@media (max-width:1024px) {
+   .catalog__item {
+      width: calc(33.33% - 15px);
+      height: 390px;
+   }
+
+   .cart__description {
+      font-size: 14px;
+   }
+}
+
+@media (max-width:768px) {
+   .header__image {
+      width: 40px;
+   }
+
+   .catalog__item {
+      width: calc(50% - 10px);
+   }
+
+   .product__title {
+      font-size: 26px;
+      line-height: 34px;
+   }
+
+   .prouct__subtitle {
+      font-size: 16px;
+      line-height: 24px;
+   }
+
+   .product__price {
+      font-size: 18px;
+   }
+
+   .product__button {
+      font-size: 14px;
+      padding: 13px 35px;
+      border-radius: 13px;
+
+   }
+
+
+   .cart__info {
+      flex-direction: column;
+      text-align: center;
+   }
+
+   .button__deleted {
+      padding: 10px 15px;
+      font-size: 14px;
+   }
+
+   .cart__pay__btn button {
+      padding: 10px 35px;
+      font-size: 14px;
+   }
+}
+
+@media (max-width:765px) {
+   .header {
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+   }
+
+   .header__wrapper {
+      padding: 10px 0px 10px;
+
+   }
+
+   .header__burger {
+      width: 32px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   .burger__line {
+      width: 100%;
+      height: 4px;
+      background-color: #000;
+      border-radius: 2px;
+      transition: .3s;
+   }
+
+
+
+   .header__burger.active .burger__line:nth-child(1) {
+      transform: rotate(45deg);
+      margin-top: 12px;
+      transition: .3s;
+   }
+
+   .header__burger.active .burger__line:nth-child(3) {
+      transform: rotate(-45deg);
+      margin-bottom: 12px;
+      transition: .3s;
+   }
+
+   .header__burger.active .burger__line:nth-child(2) {
+      transform: scale(0);
+      transition: .3s;
+   }
+
+   .header__navigation {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      height: 100%;
+      width: 40%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1;
+      transition: .3s;
+   }
+
+   .header__navigation.active {
+      top: 0;
+      transition: .3s;
+   }
+
+   .header__menu {
+      display: block;
+      padding-top: 70px
+   }
+
+   .header__list a {
+      padding-left: 25px;
+      font-size: 16px;
+      color: #fff;
+   }
+}

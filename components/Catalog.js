@@ -20,16 +20,21 @@ function Catalog() {
       this.catalogData.forEach(({ title, price, image, id }) => {
          li += `<li class="catalog__item">
                         <div class="catalog__item__image">
-                           <a href="#${CATALOG}/${id}"><img src="${image}" alt="${title}"></a>
+                           <a href="#${CATALOG}/${id}">
+                              <img src="${image}" alt="${title}">
+                           </a>
                         </div>
                         <div class="catalog__item__info">
-                           <div class="catalog__item__title"><a href="#${CATALOG}/${id}">${title}</a></div>
-                           <div class="catalog__item__option">
-                              <div class="catalog__item__price">${price} $</div>
-                              <button class="catalog__item__btn" id="${id}">Add to cart</button>
-                           </div>
+                           <div class="catalog__item__title">
+                              <a href="#${CATALOG}/${id}">${title}</a></div>
+                              <div class="catalog__item__price">
+                                 ${price} $
+                              </div>
                         </div>
-                        </li>`
+                        <div class = "catalog__item__button">
+                           <button class = "add__cart" id="${id}">Add to cart</button>
+                        </div>
+                  </li>`
       })
 
       element.innerHTML = `

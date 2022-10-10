@@ -54,22 +54,14 @@ function App() {
       document.title = (pageTitle);
    }
 
-   this.createActiveTitle = () => {
-      const dataTitle = document.querySelectorAll('.header__link')
-      const classActive = document.querySelector('.active')
-      console.log(classActive);
-      dataTitle.forEach(item => {
-         item.addEventListener('click', () => {
-            if (classActive) {
-               classActive.remove()
-               item.classList.add('active')
-            } else {
-               item.classList.add('active')
-            }
-         })
+   this.addEventBurger = () => {
+      const burger = document.getElementById('burger');
+      const nav = document.getElementById('nav')
+      burger.addEventListener('click', () => {
+         burger.classList.toggle('active')
+         nav.classList.toggle('active')
       })
    }
-
 
    this.render = async () => {
 
@@ -84,7 +76,7 @@ function App() {
       this.elementApp.appendChild(header);
       this.elementApp.appendChild(main);
       this.elementApp.appendChild(footer);
-      this.createActiveTitle()
+      this.addEventBurger()
    }
 
    this.init = () => {
@@ -97,12 +89,3 @@ function App() {
 const app = new App().init();
 
 export default app;
-
-
-// • Метод create() для создания главного элемента «div» с классом «app» и сохранения его в
-// свойстве «element».
-// • Метод render() для добавления главного элемента в тег «body» HTML-документа и для
-// последующего добавления в контейнер <div class=”app”></div> других элементов из других
-// загруженных компонентов.
-// • Метод init() для инициализации главного компонента вашего приложения — для описании
-// будущей логики загрузки других компонентов, а также для вызова методов create() и render().

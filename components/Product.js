@@ -12,16 +12,31 @@ function Product() {
       const { title, image, description, price, id } = productData
       element.classList.add('product')
 
-      element.innerHTML = `<div class="product__wrapper">
-                              <div class = "container">
-                                 <h1>${title}<h1>
-                                 <h3>${price} $</h3>
-                                 <button class="add__product__cart" id="${id}">Add Product</button>
-                                 <p>${description}</p>
-                                 <img src="${image}" alt="${title}">
+      element.innerHTML = `<div class = "container">
+                              <div class = "product__wrapper">
+                                 <div class = "product__items">
+                                    <div class = "product__item">
+                                       <div class = "product__image">
+                                          <img src="${image}" alt="${title}">
+                                       </div>
+                                    </div>
+                                    <div class = "product__item">
+                                       <h2 class = "product__title">
+                                          ${title}
+                                       <h2>
+                                       <div class = "prouct__subtitle">
+                                          ${description}
+                                       </div>
+                                       <div class = "product__price">
+                                          ${price} $
+                                       </div>
+                                       <button class="product__button" id="${id}">
+                                          Add Product
+                                       </button>
+                                    </div>
+                                 </div>
                               </div>
                            </div>`
-
       return element
    }
 

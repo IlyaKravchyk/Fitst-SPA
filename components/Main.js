@@ -1,5 +1,6 @@
 import { getSlugNoHash, getPageData, createHashChangeEvent, getHtmlTemplate, createClickEvent } from '../helpers/helpers.js';
-import { CATALOG, CART } from '../constants/constants.js'
+import { CATALOG, CART, HOME, ABOUT, CONTACTS } from '../constants/constants.js'
+
 
 function Main() {
    this.localData = JSON.parse(localStorage.getItem('dataSPA'))
@@ -12,7 +13,7 @@ function Main() {
    }
 
 
-   this.createCountInBasket = (dataCount) => {
+   this.createNewCountInBasket = (dataCount) => {
       this.elementCount = document.createElement('span')
       this.elementCount.classList.add('header__cart__count')
       this.elementCount.innerHTML = `${dataCount}`
@@ -38,15 +39,34 @@ function Main() {
       }
 
       const mainData = getPageData(slugNoHash)
-      const { title, content } = mainData;
+      const { title, content } = mainData
 
-      this.element.innerHTML = getHtmlTemplate(title, content)
+      if (slugNoHash === HOME) {
+         import('./Home.js').then(response => response.default)
+            .then(data => {
+               this.element.innerHTML = getHtmlTemplate(title, content, data.outerHTML)
+            })
+      }
+
+      if (slugNoHash === ABOUT) {
+         import('./About.js').then(response => response.default)
+            .then(data => {
+               this.element.innerHTML = getHtmlTemplate(title, '', data.outerHTML)
+            })
+      }
+      if (slugNoHash === CONTACTS) {
+         import('./Contacts.js').then(response => response.default)
+            .then(data => {
+               this.element.innerHTML = getHtmlTemplate(title, '', data.outerHTML)
+            })
+      }
+
+      //this.element.innerHTML = getHtmlTemplate(title, content)
 
       if (slugNoHash === CART) {
          import('./Cart.js').then(response => {
             const cartData = response.default.init();
             this.element.innerHTML = cartData.outerHTML;
-
             const btnDelete = this.element.querySelectorAll('.button__deleted');
             btnDelete.forEach(btn => {
                btn.addEventListener('click', (event) => {
@@ -71,7 +91,7 @@ function Main() {
                const responseDefault = response.default
                responseDefault.then(data => {
                   this.element.innerHTML = this.getHtmlTemplate(title, content, data.outerHTML)
-                  const addToCartBtns = this.element.querySelectorAll('.catalog__item__btn')
+                  const addToCartBtns = this.element.querySelectorAll('.add__cart')
                   addToCartBtns.forEach(btn => {
                      btn.addEventListener('click', (e) => {
                         this.addToCart(e.target.id)
@@ -80,14 +100,13 @@ function Main() {
                })
             })
          }
-
          if (slugNoHash.includes('/')) {
             this.element.innerHTML = `<div class = "loader"><div/>`
             import('./Product.js').then(response => {
                const product = response.default.init();
                product.then(productData => {
                   this.element.innerHTML = productData.outerHTML;
-                  const addProductBtn = this.element.querySelector('.add__product__cart');
+                  const addProductBtn = this.element.querySelector('.product__button');
                   addProductBtn.addEventListener('click', (e) => {
                      this.addToCart(e.target.id)
                   })
@@ -95,8 +114,8 @@ function Main() {
             })
          }
       }
-
    }
+
 
    this.cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -114,7 +133,7 @@ function Main() {
       }
 
       localStorage.setItem('cart', JSON.stringify(this.cart))
-      this.createCountInBasket(this.cart.length)
+      this.createNewCountInBasket(this.cart.length)
    }
 
    this.deleteToCart = (idProduct) => {
@@ -122,7 +141,7 @@ function Main() {
       const newDataCart = dataCart.filter(({ id }) => id !== +idProduct)
       localStorage.setItem('cart', JSON.stringify(newDataCart))
       this.filterThisCartArray(idProduct)
-      this.createCountInBasket(newDataCart.length)
+      this.createNewCountInBasket(newDataCart.length)
       this.render(location.hash)
    }
 
@@ -162,9 +181,9 @@ function Main() {
    this.getHtmlTemplate = (title, content, htmlElement) => {
       return `<div class="container">
                      <div class="main_wrapper">
-                        <h1>${title}</h1>
+                        <h1 class = "main__title">${title}</h1>
                         ${htmlElement ? htmlElement : ''}
-                        <p>${content}</p>
+                        <p class = "main__content">${content}</p>
                      </div>            
                </div>`
    }

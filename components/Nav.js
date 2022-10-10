@@ -5,6 +5,7 @@ function Nav() {
    this.create = () => {
       const element = document.createElement('nav');
       element.classList.add('header__navigation')
+      element.setAttribute('id', 'nav');
       let li = '';
       this.localData.forEach(({ title, slug, id }) => {
          if (slug !== CART) {
@@ -15,7 +16,8 @@ function Nav() {
       })
       element.innerHTML = `<ul class = "header__menu">
                               ${li}
-                           </ul>`
+                           </ul>
+                           `
       return element
    }
    this.init = () => {
