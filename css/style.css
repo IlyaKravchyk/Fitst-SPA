@@ -63,6 +63,17 @@ body {
    display: flex;
 }
 
+.header__navigation {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   width: 66.66%;
+}
+
+.header__cart {
+   padding-right: 10px;
+}
+
 #basket__count {
    font-size: 20px;
    position: relative;
